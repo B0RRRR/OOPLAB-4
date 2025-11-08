@@ -15,9 +15,8 @@ int main() {
     geometry::Array<std::shared_ptr<geometry::Figure<double>>> figures;
 
     while (true) {
-        std::cout << "\nВыберите действие:\n"
-                  << "1. Добавить фигуру\n"
-                  << "2. Посчитать суммарную площадь\n"
+        std::cout << "1. Добавить фигуру\n"
+                  << "2. Посчитать площадь\n"
                   << "0. Выход\n> ";
 
         int choice;
@@ -27,10 +26,10 @@ int main() {
 
         switch (choice) {
             case 1: {
-                std::cout << "Выберите тип фигуры:\n"
-                          << "1. Треугольник\n"
+                std::cout << "1. Треугольник\n"
                           << "2. Квадрат\n"
                           << "3. Прямоугольник\n> ";
+
 
                 int type;
                 std::cin >> type;
@@ -95,7 +94,7 @@ int main() {
                 double total = 0.0;
                 for (std::size_t i = 0; i < figures.Size(); ++i)
                     total += figures[i]->Area();
-                std::cout << "Суммарная площадь: " << total << "\n";
+                std::cout << total << "\n";
                 break;
             }
 

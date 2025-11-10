@@ -1,36 +1,39 @@
 #pragma once
 
-#include <memory>
-#include <utility>
+#include <cstddef>
 #include <stdexcept>
+#include <utility>
 
 namespace geometry {
 
 template <typename T>
 class Array {
-public:
-    Array() = default;
-    explicit Array(size_t capacity);
-    Array(const Array& other);
-    Array(Array&& other) noexcept;
-    Array& operator=(const Array& other);
-    Array& operator=(Array&& other) noexcept;
+ public:
+  Array() = default;
+  explicit Array(size_t capacity);
+  Array(const Array& other);
+  Array(Array&& other) noexcept;
 
-    void PushBack(const T& value);
-    void RemoveAt(size_t index);
+  Array& operator=(const Array& other);
+  Array& operator=(Array&& other) noexcept;
 
-    size_t Size() const noexcept;
-    size_t Capacity() const noexcept;
+  ~Array();
 
-    T& operator[](size_t index);
-    const T& operator[](size_t index) const;
+  void PushBack(const T& value);
+  void RemoveAt(size_t index);
 
-private:
-    void Grow();
+  size_t Size() const noexcept { return size_; }
+  size_t Capacity() const noexcept { return capacity_; }
 
-    std::unique_ptr<T[]> data_;
-    size_t size_{0};
-    size_t capacity_{0};
+  T& operator[](size_t index);
+  const T& operator[](size_t index) const;
+
+ private:
+  void Grow();
+
+  T* data_ = nullptr;
+  size_t size_ = 0;
+  size_t capacity_ = 0;
 };
 
 } // namespace geometry
